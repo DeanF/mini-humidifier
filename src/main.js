@@ -362,6 +362,7 @@ class MiniHumidifier extends LitElement {
       modelConfiguration.target_humidity);
     this.config.indicators = this.getIndicatorsConfig(config, modelConfiguration.indicators);
     this.config.buttons = this.getButtonsConfig(config, modelConfiguration.buttons);
+    this.config.mode_mapping = modelConfiguration.mode_mapping || {};
 
     if (typeof config.secondary_info === 'string') {
       this.config.secondary_info = { type: config.secondary_info };
