@@ -327,8 +327,8 @@ class MiniHumidifier extends LitElement {
   }
 
   setConfig(config) {
-    if (!config.entity || config.entity.split('.')[0] !== 'fan')
-      throw new Error('Specify an entity from within the fan domain.');
+    if (!config.entity || config.entity.split('.')[0] !== 'humidifier')
+      throw new Error('Specify an entity from within the humidifier domain.');
 
     let modelConfiguration;
     const { model } = config;
@@ -339,7 +339,7 @@ class MiniHumidifier extends LitElement {
       modelConfiguration = HUMIDIFIERS.default();
 
     this.config = {
-      model: 'zhimi.humidifier.cb1',
+      model: 'deerma.humidifier.mjjsq',
       tap_action: {
         action: 'more-info',
         navigation_path: '',

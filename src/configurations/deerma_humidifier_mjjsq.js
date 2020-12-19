@@ -8,21 +8,21 @@ const DEERMA_HUMIDIFIER_MJJSQ = () => ({
     toggle_action: (state, entity) => {
       const service = state === 'on' ? 'turn_off' : 'turn_on';
       const options = { entity_id: entity.entity_id };
-      return this.call_service('fan', service, options);
+      return this.call_service('humidifier', service, options);
     },
   },
   target_humidity: {
     icon: ICON.HUMIDITY,
     unit: '%',
-    min: 30,
-    max: 80,
+    min: 40,
+    max: 70,
     step: 1,
     hide: false,
     hide_indicator: false,
     state: { attribute: 'target_humidity' },
     change_action: (selected, state, entity) => {
       const options = { entity_id: entity.entity_id, humidity: selected };
-      return this.call_service('fan', 'xiaomi_miio_set_target_humidity', options);
+      return this.call_service('humidifier', 'set_humidity', options);
     },
   },
   indicators: {
@@ -32,7 +32,7 @@ const DEERMA_HUMIDIFIER_MJJSQ = () => ({
       round: 1,
       order: 1,
       hide: false,
-      source: { attribute: 'temperature' },
+      source: { attribute: 'current_temperature' },
     },
     humidity: {
       icon: ICON.HUMIDITY,
@@ -40,7 +40,7 @@ const DEERMA_HUMIDIFIER_MJJSQ = () => ({
       round: 1,
       order: 2,
       hide: false,
-      source: { attribute: 'humidity' },
+      source: { attribute: 'current_humidity' },
     },
     status: {
       icon: ICON.TANK,
@@ -68,8 +68,8 @@ const DEERMA_HUMIDIFIER_MJJSQ = () => ({
       active: (state, entity) => (entity.state !== 'off'),
       state: { attribute: 'mode' },
       change_action: (selected, state, entity) => {
-        const options = { entity_id: entity.entity_id, speed: selected };
-        return this.call_service('fan', 'set_speed', options);
+        const options = { entity_id: entity.entity_id, mode: selected };
+        return this.call_service('humidifier', 'set_mode', options);
       },
     },
     led: {
@@ -79,9 +79,9 @@ const DEERMA_HUMIDIFIER_MJJSQ = () => ({
       order: 2,
       state: { attribute: 'led', mapper: state => (state ? 'on' : 'off') },
       toggle_action: (state, entity) => {
-        const service = state === 'on' ? 'xiaomi_miio_set_led_off' : 'xiaomi_miio_set_led_on';
+        const service = state === 'on' ? 'set_led_off' : 'set_led_on';
         const options = { entity_id: entity.entity_id };
-        return this.call_service('fan', service, options);
+        return this.call_service('xiaomi_humidifier', service, options);
       },
     },
     buzzer: {
@@ -91,9 +91,9 @@ const DEERMA_HUMIDIFIER_MJJSQ = () => ({
       order: 3,
       state: { attribute: 'buzzer', mapper: state => (state ? 'on' : 'off') },
       toggle_action: (state, entity) => {
-        const service = state === 'on' ? 'xiaomi_miio_set_buzzer_off' : 'xiaomi_miio_set_buzzer_on';
+        const service = state === 'on' ? 'set_buzzer_off' : 'set_buzzer_on';
         const options = { entity_id: entity.entity_id };
-        return this.call_service('fan', service, options);
+        return this.call_service('xiaomi_humidifier', service, options);
       },
     },
   },
