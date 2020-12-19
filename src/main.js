@@ -162,7 +162,7 @@ class MiniHumidifier extends LitElement {
   getIndicatorConfig(key, value, config) {
     const item = {
       id: key,
-      source: { enitity: undefined, attribute: undefined, mapper: undefined },
+      source: { entity: undefined, attribute: undefined, mapper: undefined },
       icon: '',
       ...value,
     };
@@ -531,7 +531,7 @@ class MiniHumidifier extends LitElement {
 
     const { mode } = this.buttons;
     const { selected } = mode;
-    const label = selected ? selected.name : mode.state;
+    const label = selected ? selected.name : this.config.mode_mapping[mode.state];
     const icon = this.config.secondary_info.icon ? this.config.secondary_info.icon : mode.icon;
 
     return html`

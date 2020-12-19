@@ -53,6 +53,12 @@ const DEERMA_HUMIDIFIER_MJJSQ = () => ({
       },
     },
   },
+  mode_mapping: {
+    1: 'Low',
+    2: 'Medium',
+    3: 'High',
+    4: 'Humidity',
+  },
   buttons: {
     mode: {
       icon: ICON.FAN,
@@ -60,10 +66,10 @@ const DEERMA_HUMIDIFIER_MJJSQ = () => ({
       hide: false,
       order: 1,
       source: {
-        humidity: 'auto',
-        low: 'low',
-        medium: 'medium',
-        high: 'high',
+        humidity: 'Humidity',
+        low: 'Low',
+        medium: 'Medium',
+        high: 'High',
       },
       active: (state, entity) => (entity.state !== 'off'),
       state: { attribute: 'mode' },
